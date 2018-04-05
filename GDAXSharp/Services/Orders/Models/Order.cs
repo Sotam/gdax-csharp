@@ -12,6 +12,7 @@ namespace GDAXSharp.Services.Orders.Models
         public decimal Size { get; set; }
 
         public decimal Price { get; set; }
+        public decimal Funds { get; set; }
 
         [JsonProperty("type")]
         [JsonConverter(typeof(StringEnumConverter))]
@@ -27,5 +28,9 @@ namespace GDAXSharp.Services.Orders.Models
         public GoodTillTime CancelAfter { get; set; }
 
         public bool PostOnly { get; set; }
+        public bool ShouldSerializeSize()
+        {
+            return false;
+        }
     }
 }

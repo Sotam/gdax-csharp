@@ -45,7 +45,21 @@ namespace GDAXSharp.Services.Orders
 
             return await PlaceOrderAsync(order);
         }
+        public async Task<OrderResponse> PlaceFundsMarketOrderAsync(
+            OrderSide side,
+            ProductType productId,
+            decimal funds)
+        {
+            var order = new Order
+            {
+                Side = side,
+                ProductId = productId,
+                OrderType = OrderType.Market,
+                Funds = funds
+            };
 
+            return await PlaceOrderAsync(order);
+        }
         public async Task<OrderResponse> PlaceLimitOrderAsync(
             OrderSide side,
             ProductType productId,
@@ -90,7 +104,28 @@ namespace GDAXSharp.Services.Orders
 
             return await PlaceOrderAsync(order);
         }
+        public async Task<OrderResponse> PlaceFundsLimitOrderWithAsync(
+                    OrderSide side,
+                    ProductType productId,
+                    decimal funds,
+                    decimal price,
+                    GoodTillTime cancelAfter,
+                    bool postOnly = true)
+        {
+            var order = new Order
+            {
+                Side = side,
+                ProductId = productId,
+                OrderType = OrderType.Limit,
+                Price = price,
+                Size = size,
+                TimeInForce = TimeInForce.Gtt,
+                CancelAfter = cancelAfter,
+                PostOnly = postOnly
+            };
 
+            return await PlaceOrderAsync(order);
+        }
         public async Task<OrderResponse> PlaceStopOrderAsync(
             OrderSide side,
             ProductType productId,
