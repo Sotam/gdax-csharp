@@ -4,12 +4,12 @@ using GDAXSharp.Services.Orders.Models;
 using GDAXSharp.Services.Orders.Models.Responses;
 using GDAXSharp.Services.Orders.Types;
 using GDAXSharp.Shared.Types;
+using GDAXSharp.Shared.Utilities;
 using GDAXSharp.Shared.Utilities.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using GDAXSharp.Shared.Utilities;
 
 namespace GDAXSharp.Services.Orders
 {
@@ -96,28 +96,7 @@ namespace GDAXSharp.Services.Orders
 
             return await PlaceOrderAsync(order);
         }
-        public async Task<OrderResponse> PlaceFundsLimitOrderWithAsync(
-                    OrderSide side,
-                    ProductType productId,
-                    decimal funds,
-                    decimal price,
-                    GoodTillTime cancelAfter,
-                    bool postOnly = true)
-        {
-            var order = new Order
-            {
-                Side = side,
-                ProductId = productId,
-                OrderType = OrderType.Limit,
-                Price = price,
-                Size = size,
-                TimeInForce = TimeInForce.Gtt,
-                CancelAfter = cancelAfter,
-                PostOnly = postOnly
-            };
 
-            return await PlaceOrderAsync(order);
-        }
         public async Task<OrderResponse> PlaceStopOrderAsync(
             OrderSide side,
             ProductType productId,
